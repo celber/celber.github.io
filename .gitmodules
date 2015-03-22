@@ -1,0 +1,3 @@
+[submodule "app/arrow"]
+	path = app/arrow
+	url = https://github.com/celber/arrow.git
