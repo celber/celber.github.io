@@ -1,34 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@Celber - GitHub Page</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="utf-8">
+	<meta content="ie=edge" http-equiv="x-ua-compatible">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+	<title>@Celber - GitHub Page</title>
+	<meta content="" name="description">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="apple-touch-icon.png" rel="apple-touch-icon">
+	<!-- Place favicon.ico in the root directory -->
+	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<link href="bower_components/foundation/css/normalize.css" rel="stylesheet"
+	type="text/css">
+	<link href="bower_components/foundation/css/foundation.css" rel=
+	"stylesheet" type="text/css">
+	<link href="bower_components/fontawesome/css/font-awesome.min.css" rel=
+	"stylesheet" type="text/css">
+	<script src="js/vendor/modernizr-2.8.3.min.js" type="text/javascript"></script>
+	<script src=
+	"https://maps.googleapis.com/maps/api/js?key=AIzaSyBd-Z6vj3mGSxpmRUqGf4oSJptv8VbDyW0"
+	type="text/javascript"></script>
+</head>
 
-         <link rel="stylesheet" href="bower_components/foundation/css/normalize.css">
-		 <link rel="stylesheet" href="bower_components/foundation/css/foundation.css">
-		 <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
-        <link
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<body>
+	<!--[if lt IE 8]>
+			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+	<nav class="top-bar" data-topbar="">
+		<ul class="title-area">
+			<li class="name">
+				<h1><a href="#">github/celber</a></h1>
+			</li>
+		</ul>
+	</nav>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+	<div class="row" style="margin-top: 40px">
+		<div class="small-12 medium-6 columns">
+			<label>Latitude <input name="latitude" placeholder=
+			"latitude in 00.00000 format" type="text"></label> <label>Longitude
+			<input name="longitude" placeholder="longitude in 00.00000 format"
+			type="text"></label> <label>Altitude <input name="altitude"
+			placeholder="height in meters" type="text"></label> <label>Enable
+			High accuracy</label> <input id="enableHighAccuracyRadio" name=
+			"highAccuracy" type="radio" value="true"><label for=
+			"enableHighAccuracyRadio">Yes</label> <input checked="checked" id=
+			"disableHighAccuracyRadio" name="highAccuracy" type="radio" value=
+			"false"><label for="disableHighAccuracyRadio">No</label>
+			<label>Theme/Mode</label> <input checked="checked" id=
+			"proThemeRadio" name="theme" type="radio" value="pro"> <label for=
+			"proThemeRadio">Pro</label> <input disabled="disabled" id=
+			"simpleThemeRadio" name="theme" type="radio" value="simple">
+			<label for="simpleThemeRadio">Simple</label> <input disabled=
+			"disabled" id="simpleThemeRadio" name="theme" type="radio" value=
+			"child"> <label for="simpleThemeRadio">Child</label> <button class=
+			"button success expand" id="form_submit">Submit</button>
+		</div>
 
+		<div class="small-12 medium-6 columns">
+			<div id="map_canvas"></div>
+		</div>
+	</div>
 
-    </body>
+	<div class="row" style="margin-top: 40px">
+		<div class="large-10 columns large-push-1">
+			<div class="row collapse">
+				<div class="small-9 columns">
+					<input id="linkField" placeholder=
+					"Your generated Arrow tracker page" type="text">
+				</div>
+
+				<div class="small-1 columns">
+					<a class="button success postfix" data-reveal-id=
+					"sendViaSMS" href="#">SMS</a>
+				</div>
+
+				<div class="small-2 columns">
+					<button class="button postfix disabled" id=
+					"shorten">Shorten</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="reveal-modal" data-reveal="" id="sendViaSMS">
+		<h2 id="modalTitle">Send generated link with SMS</h2><label>Number
+		<input name="phone" placeholder="+48 700 000 000 (poland only)" type=
+		"text"></label> <label>Message 
+		<textarea name="message"></textarea>
+		</label>
+		<button class="button success expand" id="sendSMS">Send SMS</button>
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+	
+	<div class="reveal-modal" data-reveal="" id="sentSuccess">
+		<h2>Sent successfully!</h2>
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+	
+	<div class="reveal-modal" data-reveal="" id="sentFailed">
+		<h2>Could not send!</h2>
+		
+		<p id="smsErrorMessage"></p>
+		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
+	
+	<script src=
+	"//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type=
+	"text/javascript"></script><script type="text/javascript">
+window.jQuery || document.write('<script src="bower_components/jquery/dist/jquery.min.js"><\/script>')
+	</script>
+	
+	<script src="js/plugins.js" type="text/javascript"></script>
+	<script src="js/main.js" type="text/javascript"></script>
+	<script src="https://apis.google.com/js/client.js?onload=initGapi"
+type="text/javascript"></script>
+<script src="bower_components/foundation/js/foundation.min.js"
+	type="text/javascript"></script>
+	<script type="text/javascript">
+			$(document).foundation(); 
+	</script>
+</body>
 </html>
