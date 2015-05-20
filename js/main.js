@@ -53,7 +53,7 @@ function updatePosition(evt) {
 }
 
 function generate(evt) {
-	var host = "http://celber.github.io/app/arrow/";
+	var host = "http://celber.github.io/app/arrow/dist/themes/";
 	var lat = $("[name=latitude]").val();
 	var lng = $("[name=longitude]").val();
 	var alt = $("[name=altitude]").val();
@@ -62,6 +62,7 @@ function generate(evt) {
 	var link = "";
 	
 	link += host;
+	link += theme+"/";
 	link += theme+".html";
 	link += "?";
 	link += "lat="+lat+"&";
